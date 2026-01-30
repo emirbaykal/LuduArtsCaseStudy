@@ -19,7 +19,6 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
                 Destroy(gameObject);

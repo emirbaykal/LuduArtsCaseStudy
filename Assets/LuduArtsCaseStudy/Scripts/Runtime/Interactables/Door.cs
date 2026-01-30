@@ -1,4 +1,5 @@
 using LuduArtsCaseStudy.Scripts.Runtime.Core;
+using LuduArtsCaseStudy.Scripts.Runtime.Player;
 using UnityEngine;
 
 namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
@@ -7,10 +8,18 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
     {
         private bool isOpen = false;
 
-        public override void InteractionStart()
+        public override void Interact()
         {
-            isOpen = !isOpen;
-            Debug.Log(isOpen);
+            PlayerController instance = PlayerController.Instance;
+            if (instance.HaveKey())
+            {
+                instance.DecraseKey();
+                isOpen = !isOpen;
+                Debug.Log("Door is open: " + isOpen);
+            }
+            else
+                Debug.LogWarning("YOU NEED KEY. DOOR IS LOCKED!");
+            
         }
     }
 }

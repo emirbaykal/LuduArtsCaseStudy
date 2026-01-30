@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5ad147f5dd140a0a5004c63f86d62d8, type: 3}
-  m_Name: Door
+  m_Name: SO_Door
   m_EditorClassIdentifier: 
-  interactionText: Open/Close Door
+  interactionText: Hold "E" for Open/Close Door
   interactionType: 0
   holdDuration: 0

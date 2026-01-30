@@ -8,10 +8,21 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance;
+        
         private CharacterController characterController;
         
         private void Awake()
         {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+                Destroy(gameObject);
+            
+            
             characterController = GetComponent<CharacterController>();
         }
 
@@ -123,6 +134,28 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
             UIManager.Instance.HideItemText();
         }
         
+        #endregion
+
+        #region KeyItem
+        
+        private int keyAmount = 0;
+        public int KeyAmount => keyAmount;
+
+        public void TakeKey()
+        {
+            keyAmount++;
+        }
+
+        public void DecraseKey()
+        {
+            keyAmount--;
+        }
+
+        public bool HaveKey()
+        {
+            return keyAmount > 0;
+        }
+
         #endregion
     }
 }
