@@ -8,21 +8,14 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
-        private Vector2 input;
         private CharacterController characterController;
-        private Vector3 direction;
         
-        
-        [SerializeField] private float speed;
-        
-        
-
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
             
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
         }
 
         private void Update()
@@ -31,36 +24,69 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
             
             CheckInteract();
         }
-        
 
+        #region Move
+        
+        [Header("Movement")]
+        [SerializeField] private float moveSpeed = 5f;
+        private Vector3 direction;
+
+        
         private void ApplyMovement()
         {
-            characterController.Move(direction * speed * Time.deltaTime);
+            characterController.Move(direction * moveSpeed * Time.deltaTime);
         }
 
         public void Move(InputAction.CallbackContext context)
         {
-            input = context.ReadValue<Vector2>();
-            direction = new Vector3(input.x, 0, input.y);
+            Vector2 moveDelta = context.ReadValue<Vector2>();
+            Vector3 camForward = cameraRoot.transform.forward;
+            Vector3 camRight = cameraRoot.transform.right;
+
+            camForward.y = 0f;
+            camRight.y = 0f;
+
+            camForward.Normalize();
+            camRight.Normalize();
+
+            direction = camForward * moveDelta.y + camRight * moveDelta.x;
+
+            transform.position += direction * moveSpeed * Time.deltaTime;
         }
-        
+
+        #endregion
+
+
+        #region Camera Rotation
+
         [SerializeField] private Transform cameraRoot;
-        [SerializeField] private float sensitivity = 0.1f;
+        [SerializeField] private float sensitivity = 100f;
 
-        private float xRotation = 0f;
+        float xRotation = 0f;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public void OnLook(InputAction.CallbackContext context)
         {
-            Vector2 lookDelta = context.ReadValue<Vector2>() * sensitivity;
+            Vector2 lookDelta = context.ReadValue<Vector2>();
 
-            //// Yukarı-aşağı (kamera)
-            //xRotation -= lookDelta.y;
-            //xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-            //cameraRoot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            float mouseX = lookDelta.x * sensitivity * Time.deltaTime;
+            float mouseY = lookDelta.y * sensitivity * Time.deltaTime;
 
-            // Sağa-sola (body)
-            transform.Rotate(Vector3.up * lookDelta.x);
+            // -------- PITCH (YUKARI-AŞAĞI) --------
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            cameraRoot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+            // -------- YAW (SAĞA-SOLA) --------
+            transform.Rotate(Vector3.up * mouseX, Space.World);       
+            
         }
+
+        #endregion
+        
 
         #region InteractionSystem
 

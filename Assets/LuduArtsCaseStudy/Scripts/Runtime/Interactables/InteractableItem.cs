@@ -15,10 +15,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
 
         public virtual void InteractionStart() { }
         public virtual void InteractionStop() { }
+        public virtual void Interact() { }
         
-        public virtual void Interact()
-        {
-            Debug.Log(name + " interacted");
-        }
     }
 }

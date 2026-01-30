@@ -14,6 +14,6 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
         float GetHoldTime(); // for hold
         void InteractionStart(); //toggle on hold start 
         void InteractionStop(); //toggle of/ hold cancel 
-        void Interact(); //Instant and hold complete
+        void Interact();
     }
 }

@@ -45,7 +45,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
             InteractionType type = controller.CurrentInteractable.GetInteractionType();
 
             if (type != InteractionType.Hold)
-                controller.CurrentInteractable.InteractionStart();
+                controller.CurrentInteractable.Interact();
         }
 
         private void OnPerformed(InputAction.CallbackContext context)
@@ -58,8 +58,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
 
             if (type == InteractionType.Hold)
             {
-                Debug.Log("Holding");
-                controller.CurrentInteractable.Interact();
+                controller.CurrentInteractable.InteractionStart();
             }
             
         }
@@ -69,7 +68,6 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
 
             Debug.Log("Canceled");
             controller.CurrentInteractable.InteractionStop();
-
         }
     }
 }
