@@ -1,4 +1,5 @@
 using System;
+using LuduArtsCaseStudy.Scripts.Runtime.Core;
 using UnityEngine;
 
 namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
@@ -15,24 +16,34 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
 
         public override void InteractionStop()
         {
-            isHolding = false;
+            StopHold();
         }
-
+        
         public override void Interact()
         {
-            Debug.Log("Hold finish!");
+            Debug.Log("Hold Success!");
+            
         }
         private void Update()
         {
             if (isHolding)
+            {
+                Debug.Log("hold");
                 holdTime += Time.deltaTime;
+                UIManager.Instance.ChangeHoldSlider(holdTime / GetHoldTime());
+            }
             if (holdTime >= GetHoldTime())
             {
-                isHolding = false;
-                holdTime = 0;
-                
+                StopHold();
                 Interact();
             }
+        }
+
+        private void StopHold()
+        {
+            isHolding = false;
+            holdTime = 0;
+            UIManager.Instance.HideHoldSlider();
         }
     }
 }

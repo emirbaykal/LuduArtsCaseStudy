@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ad147f5dd140a0a5004c63f86d62d8, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  interactionText: 
+  interactionText: 'Hold "E" for Open Chest '
   interactionType: 1
   holdDuration: 5

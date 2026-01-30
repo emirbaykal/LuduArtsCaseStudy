@@ -10,6 +10,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
         public override void InteractionStart()
         {
             isOpen = !isOpen;
+            Debug.Log(isOpen);
         }
     }
 }

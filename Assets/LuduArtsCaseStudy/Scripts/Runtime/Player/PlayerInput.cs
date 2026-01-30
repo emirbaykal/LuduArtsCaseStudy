@@ -66,7 +66,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
         {
             var controller = playerController;
 
-            Debug.Log("Canceled");
+            Debug.Log(controller);
             controller.CurrentInteractable.InteractionStop();
         }
     }

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace LuduArtsCaseStudy.Scripts.Runtime.Core
 {
     public enum InteractionType
@@ -11,6 +13,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
     {
         InteractionType GetInteractionType();
         string GetInteractionText(); 
+        Transform GetTransform();
         float GetHoldTime(); // for hold
         void InteractionStart(); //toggle on hold start 
         void InteractionStop(); //toggle of/ hold cancel 

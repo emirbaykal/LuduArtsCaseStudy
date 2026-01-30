@@ -13,9 +13,6 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
-            
-            //Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = false;
         }
 
         private void Update()
@@ -113,18 +110,17 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
 
                 if (interactable != null)
                 {
+
                     currentInteractable = interactable;
                     Debug.DrawLine(ray.origin, hit.point, Color.green);
-
-                    Debug.Log(currentInteractable);
                     
-                    //UIManager.instance.ShowInteractionText(interactable.GetInteractionText());
+                    UIManager.Instance.ShowItemText(currentInteractable.GetInteractionText(), currentInteractable.GetTransform().position);
                     return;
                 }
             }
             
             currentInteractable = null;
-            //UIManager.Instance.HideInteractionText();
+            UIManager.Instance.HideItemText();
         }
         
         #endregion
