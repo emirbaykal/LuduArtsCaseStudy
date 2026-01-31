@@ -6,22 +6,27 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
     public class Switcher : InteractableItem
     {
         [Header("Elements")]
-        [SerializeField] Material openMaterial;
-        [SerializeField] Material closeMaterial;
-        [SerializeField] private MeshRenderer renderer;
+        [SerializeField] Material m_openMaterial;
+        [SerializeField] Material m_closeMaterial;
+        [SerializeField] private MeshRenderer m_renderer;
 
-        private bool isOpen = true;
+        private bool m_isOpen = true;
 
+
+        #region Interaction Override
 
         public override void Interact()
         {
-            isOpen = !isOpen;
+            m_isOpen = !m_isOpen;
             
-            if (isOpen)
-                renderer.material = openMaterial;
+            if (m_isOpen)
+                m_renderer.material = m_openMaterial;
             else
-                renderer.material = closeMaterial;
+                m_renderer.material = m_closeMaterial;
         }
+
+        #endregion
+        
 
     }
 }

@@ -9,37 +9,42 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
 {
     public class PlayerInput : MonoBehaviour
     {
-        private PlayerController playerController;
+        private PlayerController m_playerController;
         [SerializeField] InputActionAsset inputAction;
-        private InputAction interactAction;
-        private Coroutine holdRoutine;
-        
+        private InputAction m_interactAction;
+
+        #region Unity Methods
 
         private void Awake()
         {
-            playerController = GetComponent<PlayerController>();
-            interactAction = inputAction.FindAction("Interact");
+            m_playerController = GetComponent<PlayerController>();
+            m_interactAction = inputAction.FindAction("Interact");
         }
 
         private void OnEnable()
         {
-            interactAction.Enable();
-            interactAction.started += OnStarted;
-            interactAction.performed += OnPerformed;
-            interactAction.canceled += OnCanceled;
+            m_interactAction.Enable();
+            m_interactAction.started += OnStarted;
+            m_interactAction.performed += OnPerformed;
+            m_interactAction.canceled += OnCanceled;
         }
         
         private void OnDisable()
         {
-            interactAction.started -= OnStarted;
-            interactAction.performed -= OnPerformed;
-            interactAction.canceled -= OnCanceled;
-            interactAction.Disable();
+            m_interactAction.started -= OnStarted;
+            m_interactAction.performed -= OnPerformed;
+            m_interactAction.canceled -= OnCanceled;
+            m_interactAction.Disable();
         }
-        
+
+        #endregion
+
+
+        #region Input Actions
+
         private void OnStarted(InputAction.CallbackContext context)
         {
-            var controller = playerController;
+            var controller = m_playerController;
             if(controller.CurrentInteractable == null) return;
 
             InteractionType type = controller.CurrentInteractable.GetInteractionType();
@@ -50,7 +55,7 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
 
         private void OnPerformed(InputAction.CallbackContext context)
         {
-            var controller = playerController;
+            var controller = m_playerController;
 
             if(controller.CurrentInteractable == null) return;
 
@@ -64,9 +69,12 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
         }
         private void OnCanceled(InputAction.CallbackContext context)
         {
-            var controller = playerController;
+            var controller = m_playerController;
 
             controller.CurrentInteractable.InteractionStop();
         }
+
+        #endregion
+        
     }
 }

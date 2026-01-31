@@ -167,11 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5952ea6a559c4720b3a22b0b93021a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  cameraRoot: {fileID: 7550165815410827850}
+  m_moveSpeed: 5
+  m_cameraRoot: {fileID: 7550165815410827850}
   sensitivity: 100
-  interactDistance: 3
-  interactMask:
+  m_interactDistance: 3
+  m_interactMask:
     serializedVersion: 2
     m_Bits: 64
 --- !u!143 &8765945975326646804

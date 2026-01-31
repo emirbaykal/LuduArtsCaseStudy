@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7309c817f2844ac2b24acfe00762bdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionData: {fileID: 11400000, guid: f226f962e14ae6b4e945c38a09891a69, type: 2}
-  openMaterial: {fileID: 2100000, guid: ede157605d7488347b1f00980d5f8252, type: 2}
-  closeMaterial: {fileID: 2100000, guid: 93a53e5aa0051f344a48c9f66654ad60, type: 2}
-  renderer: {fileID: 8572294617840374972}
+  m_interactionData: {fileID: 11400000, guid: f226f962e14ae6b4e945c38a09891a69, type: 2}
+  m_openMaterial: {fileID: 2100000, guid: ede157605d7488347b1f00980d5f8252, type: 2}
+  m_closeMaterial: {fileID: 2100000, guid: 93a53e5aa0051f344a48c9f66654ad60, type: 2}
+  m_renderer: {fileID: 8572294617840374972}
 --- !u!135 &8313770512366242394
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -10,9 +10,11 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
         public static UIManager Instance;
 
         [Header("UI Elements")]
-        [SerializeField] private TextMeshProUGUI itemText;
+        [SerializeField] private TextMeshProUGUI m_itemText;
 
-        [SerializeField] private Slider holdSlider;
+        [SerializeField] private Slider m_holdSlider;
+
+        #region Unity Methods
 
         private void Awake()
         {
@@ -23,34 +25,55 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
             else
                 Destroy(gameObject);
             
-            itemText.gameObject.SetActive(false);
+            m_itemText.gameObject.SetActive(false);
         }
 
+        #endregion
+       
+
+        /// <summary>
+        /// When Itema Interact is active,
+        /// it displays interaction information on the screen. 
+        /// </summary>
+        /// <param name="text">Retrieves the interaction text from “Interaction Data”</param>
+        /// <param name="worldPosition">Retrieves the position of the interacted object.</param>
         public void ShowItemText(string text, Vector3 worldPosition)
         {
-            itemText.text = text;
-            itemText.gameObject.SetActive(true);
+            m_itemText.text = text;
+            m_itemText.gameObject.SetActive(true);
             
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPosition); 
-            itemText.transform.position = screenPos;
+            m_itemText.transform.position = screenPos;
         }
 
+        /// <summary>
+        /// When the interaction ends,
+        /// the text on the screen is closed.
+        /// </summary>
         public void HideItemText()
         {
-            itemText.gameObject.SetActive(false);
+            m_itemText.gameObject.SetActive(false);
         }
+        
+        /// <summary>
+        /// The current value in the hold interaction is updated.
+        /// </summary>
+        /// <param name="value">The duration of the hold</param>
         
         public void ChangeHoldSlider(float value)
         {
             print("aaa");
-            holdSlider.gameObject.SetActive(true);
-            holdSlider.value = value;
+            m_holdSlider.gameObject.SetActive(true);
+            m_holdSlider.value = value;
         }
 
+        /// <summary>
+        /// The hold slider on the screen is turned off.
+        /// </summary>
         public void HideHoldSlider()
         {
-            holdSlider.gameObject.SetActive(false);
-            holdSlider.value = 0;
+            m_holdSlider.gameObject.SetActive(false);
+            m_holdSlider.value = 0;
         }
     }
 }

@@ -8,11 +8,16 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
     {
         private bool isHolding = false;
         private float holdTime = 0;
-        
+
+        #region Interaction Override
+
+        // Interaction start
         public override void InteractionStart()
         {
             isHolding = true;
         }
+
+        // Interaction complete
 
         public override void InteractionStop()
         {
@@ -21,24 +26,27 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Interactables
         
         public override void Interact()
         {
-            Debug.Log("Hold Success!");
-            
+            Debug.Log("Hold Success! Chest open.");
         }
+
+        #endregion
+        
         private void Update()
         {
             if (isHolding)
             {
-                Debug.Log("hold");
                 holdTime += Time.deltaTime;
                 UIManager.Instance.ChangeHoldSlider(holdTime / GetHoldTime());
             }
             if (holdTime >= GetHoldTime())
             {
                 StopHold();
+                //Hold success
                 Interact();
             }
         }
 
+        //Reset Hold
         private void StopHold()
         {
             isHolding = false;
