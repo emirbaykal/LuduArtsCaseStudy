@@ -6,6 +6,9 @@ A modular interaction system for Unity using the **New Input System**. Supports 
 
 ---
 
+
+<img width="1397" height="600" alt="InteractionSystemGraph" src="https://github.com/user-attachments/assets/141813da-ffd7-4ea4-9413-66df6090ca45" />
+
 ## Features
 
 - **Three interaction modes:**
@@ -59,12 +62,49 @@ public class Chest : InteractableItem
      * InteractionType: Instant / Hold / Toggle
      * Key: Assign which key triggers this interaction
 
-4. Setting Up Player Interaction
+3. Setting Up Player Interaction
 
-  * Attach the PlayerInteraction component to the player and configure:
+    * Attach the PlayerInteraction component to the player and configure:
 
-  * InteractDistance: Maximum distance for raycast detection.
+    * InteractDistance: Maximum distance for raycast detection.
+  
+    * InteractLayerMask: Layer(s) to detect interactable objects.
 
-  * InteractLayerMask: Layer(s) to detect interactable objects.
+    * Input Action Reference: Assign the Input Action from your Input Action Asset.
 
-  * Input Action Reference: Assign the Input Action from your Input Action Asset.
+
+## Usage
+
+  * The player will automatically detect interactable objects in front using a raycast.
+
+  * The system automatically handles:
+
+  * Instant activation on key press
+
+  * Continuous activation while holding
+
+  * Toggle activation on press/release
+
+  * You can customize behaviors by overriding InteractionStart and InteractionStop in your interactable objects.
+
+```csharp
+public class Door : InteractableItem
+{
+    private bool isOpen = false;
+
+    public override void InteractionStart()
+    {
+        isOpen = !isOpen;
+        if (isOpen) Debug.Log("Door opened!");
+        else Debug.Log("Door closed!");
+    }
+}
+```
+
+## Notes
+
+  * Ensure your Main Camera is tagged as MainCamera for raycasting.
+
+  * All interactable objects must have a collider.
+
+  * You can extend the system to add new interaction types by updating the InteractionType enum and modifying PlayerInteraction logic.
