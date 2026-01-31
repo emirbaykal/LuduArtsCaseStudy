@@ -8,9 +8,18 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        #region Instance
+
         public static PlayerController Instance;
-        
+
+        #endregion
+
+        #region Components
+
         private CharacterController m_characterController;
+
+        #endregion
+        
 
         #region Unity Methods
 

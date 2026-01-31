@@ -7,12 +7,21 @@ namespace LuduArtsCaseStudy.Scripts.Runtime.Core
 {
     public class UIManager : MonoBehaviour
     {
+        #region Instance
+
         public static UIManager Instance;
+        
+        #endregion
+
+        #region UI Elements
 
         [Header("UI Elements")]
         [SerializeField] private TextMeshProUGUI m_itemText;
 
         [SerializeField] private Slider m_holdSlider;
+
+        #endregion
+        
 
         #region Unity Methods
 
